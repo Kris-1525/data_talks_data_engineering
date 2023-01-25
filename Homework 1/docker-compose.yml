@@ -1,0 +1,39 @@
+version: "3.8"
+
+name: pgapp
+services:
+  postgresql:
+    build: ./postgresql
+    ports: 
+      - 5434:5432
+    networks:
+      - pgnet
+    image: postgresql:1
+    container_name: postgresql
+    volumes: 
+      - d:/Data Talks/Data Engineering/Week 1/Homework 1/postgresql/data:/var/lib/postgresql/data
+  pgadmin:
+    build: ./pgadmin
+    ports: 
+      - 8082:80
+    networks:
+      - pgnet
+    image: pgadmin:1
+    container_name: pgadmin
+    depends_on:
+      - postgresql
+    volumes:
+      - d:/Data Talks/Data Engineering/Week 1/Homework 1/pgadmin/data:/var/lib/pgsql/data
+  pythonsql:
+    build: ./pythonsql
+    networks:
+      - pgnet
+    image: pythonsql:1
+    container_name: pythonsql
+    depends_on:
+      - postgresql
+      - pgadmin
+    restart: unless-stopped
+
+networks:
+  pgnet: {}
