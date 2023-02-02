@@ -1,0 +1,59 @@
+###
+### A complete description of a Prefect Deployment for flow 'ny-taxi-etl-p'
+###
+name: ny_taxi_etl_d
+description: null
+version: 76beec7aa63a1d0cd674079d06a47a36
+# The work queue that will handle this deployment's runs
+work_queue_name: default
+work_pool_name: null
+work_pool_queue_name: null
+tags: []
+parameters: {}
+schedule: null
+infra_overrides: {}
+infrastructure:
+  type: process
+  env: {}
+  labels: {}
+  name: null
+  command: null
+  stream_output: true
+  working_dir: null
+  block_type_slug: process
+  _block_type_slug: process
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: ny-taxi-etl-p
+manifest_path: null
+storage: null
+path: C:\Users\krita\DataTalks\Data Engineering\Week 2\Prefect\Homework 2\Question
+  3
+entrypoint: etl_local_to_bq.py:ny_taxi_etl_p
+parameter_openapi_schema:
+  title: Parameters
+  type: object
+  properties:
+    colours:
+      title: colours
+      position: 0
+      type: array
+      items: {}
+    years:
+      title: years
+      position: 1
+      type: array
+      items: {}
+    months:
+      title: months
+      position: 2
+      type: array
+      items: {}
+  required:
+  - colours
+  - years
+  - months
+  definitions: null
+timestamp: '2023-02-02T23:04:11.125831+00:00'
