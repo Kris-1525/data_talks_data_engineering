@@ -32,7 +32,7 @@ def ny_taxi_l(path: str, datafile: str) -> None:
     dst_path = f"./data/{datafile}.parquet"
     shutil.copy(src_path, dst_path)
     gcp_block = GCS.load("ny-taxi-gcsbuc")
-    gcp_block.put_directory(local_path='./data', to_path=Path(f'./data'))
+    gcp_block.put_directory(local_path='./data', to_path='./data')
     
 @flow()
 def ny_taxi_etl() -> None:
