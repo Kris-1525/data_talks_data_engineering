@@ -5,7 +5,7 @@ import pandas as pd
 from prefect import flow, task
 from prefect.filesystems import GCS
 
-@task()
+@task(log_prints=True)
 def ny_taxi_e(dataset_url: str) -> pd.DataFrame:
     df = pd.read_csv(filepath_or_buffer=dataset_url, compression='gzip')
     print('\n\n')
