@@ -1,7 +1,9 @@
+import shutil
+import os
 from pathlib import Path
 import pandas as pd
 from prefect import flow, task
-from prefect_gcp.cloud_storage import GcsBucket
+from prefect.filesystems import GCS
 
 @task()
 def ny_taxi_e(dataset_url: str) -> pd.DataFrame:
@@ -25,8 +27,12 @@ def ny_taxi_t2(colour: str, datafile: str, df: pd.DataFrame) -> Path:
 
 @task()
 def ny_taxi_l(path: str, datafile: str) -> None:
-    gcp_block = GcsBucket.load("ny-taxi-gcsbuc")
-    gcp_block.upload_from_path(from_path=path, to_path=Path(f'{datafile}.parquet'))
+    os.mkdir('./data',exist_ok=True)
+    src_path = f"./{datafile}.parquet"
+    dst_path = f"./data/{datafile}.parquet"
+    shutil.copy(src_path, dst_path)
+    gcp_block = GCS.load("ny-taxi-gcsbuc")
+    gcp_block.put_directory(local_path='./data', to_path=Path(f'./data'))
     
 @flow()
 def ny_taxi_etl() -> None:
