@@ -27,7 +27,7 @@ def ny_taxi_t2(colour: str, datafile: str, df: pd.DataFrame) -> Path:
 
 @task()
 def ny_taxi_l(path: str, datafile: str) -> None:
-    os.mkdir('./data',exist_ok=True)
+    os.makedirs('./data',exist_ok=True)
     src_path = f"./{datafile}.parquet"
     dst_path = f"./data/{datafile}.parquet"
     shutil.copy(src_path, dst_path)
