@@ -31,6 +31,8 @@ def ny_taxi_l(path: str, datafile: str) -> None:
     src_path = f"./{datafile}.parquet"
     dst_path = f"./data/{datafile}.parquet"
     shutil.copy(src_path, dst_path)
+    dir_path = f"./{datafile}.parquet"
+    shutil.rmtree(dir_path, ignore_errors=False)
     gcp_block = GCS.load("ny-taxi-gcsbuc")
     gcp_block.put_directory(local_path='./data', to_path='./data')
     
